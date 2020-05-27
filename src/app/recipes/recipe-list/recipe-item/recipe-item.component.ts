@@ -12,13 +12,9 @@ export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
   @Input() recipeIndex: number;
 
-  constructor(private recipeService: RecipeService, private activeRoute: ActivatedRoute, private router: Router) { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
-  }
-
-  onRecipeSelected() {
-    this.router.navigate([this.recipeIndex], {relativeTo: this.activeRoute});
   }
 
 }
