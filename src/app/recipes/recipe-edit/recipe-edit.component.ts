@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
+import { Recipe } from '../recipe.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -50,7 +51,7 @@ export class RecipeEditComponent implements OnInit {
 
     this.recipeForm = new FormGroup({
       "name": new FormControl(recipeName, Validators.required),
-      "imagePath": new FormControl(recipeImgPath, Validators.required),
+      "imgPath": new FormControl(recipeImgPath, Validators.required),
       "description": new FormControl(recipeDescription, Validators.required),
       "ingredients": recipeIngredients
     });
@@ -75,17 +76,17 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    // const newRecipe = new Recipe(
-    //   this.recipeForm.value["name"],
-    //   this.recipeForm.value["description"],
-    //   this.recipeForm.value["imagePath"],
-    //   this.recipeForm.value["ingredients"]
-    // );
+    const newRecipe = new Recipe(
+      this.recipeForm.value["name"],
+      this.recipeForm.value["description"],
+      this.recipeForm.value["imgPath"],
+      this.recipeForm.value["ingredients"]
+    );
 
     if (this.editMode){
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.recipeService.updateRecipe(this.id, newRecipe);
     }else {
-      this.recipeService.addRecipe(this.recipeForm.value);
+      this.recipeService.addRecipe(newRecipe);
     }
 
     this.router.navigate(["../"], {relativeTo: this.route});
