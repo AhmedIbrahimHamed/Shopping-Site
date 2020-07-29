@@ -4,8 +4,8 @@
       <p> {{error}} </p>
     </div> -->
     <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
-    <div *ngIf="isLoading" class="loading-spinner-container">
-      <app-loading-spinner></app-loading-spinner>
+    <div *ngIf="isLoading" class="col-xs-offset-5">
+      <app-loading-spinner class="loading-spinner-container"></app-loading-spinner>
     </div>
     <form (ngSubmit)="onSubmitForm(authForm)" #authForm="ngForm" *ngIf="!isLoading">
       <div class="form-group">
